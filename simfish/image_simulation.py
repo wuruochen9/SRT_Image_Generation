@@ -21,9 +21,12 @@ import scCube
 from scCube import scCube
 from scCube.visualization import *
 from scCube.utils import *
+from matplotlib.pyplot import rc_context
+import pandas as pd
 import scanpy as sc
 import numpy as np
 import warnings
+import time
 warnings.filterwarnings("ignore")
 
 def simulate_images(
@@ -416,7 +419,7 @@ def simulate_image(
             noise_level=noise_level,
             random_noise=random_noise)
         # plot
-        path = os.path.join(path_directory_plot, "plot_{0}.png".format(genes[i]))
+        path = os.path.join(path_directory_plot, "plot_{0}sigma{1}.png".format(genes[i],sigma[0]))
         image_mip = image[900:2700,300:2400]#zoom in
         #save img arry
         file_name="image_array_"+genes[i]+".npy"
@@ -630,8 +633,8 @@ image_shape = (5000, 5000)
 ndim = len(image_shape)
 subpixel_factors = (1, 1)
 voxel_size =(100, 100)
-sigma = (1000, 1000)
-random_sigma = 0.0
+sigma = (500, 500)
+random_sigma = 100
 amplitude = 1000
 noise_level = 300
 random_margin_min = 0.05
